@@ -1,0 +1,19 @@
+{
+  "name": "node-messenger-log",
+  "version": "1.0.0",
+  "description": "Light and simple Logger",
+  "main": "src/logger.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Alterdesk/node-messenger-log.git"
+  },
+  "author": "Alterdesk",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Alterdesk/node-messenger-log/issues"
+  },
+  "homepage": "https://github.com/Alterdesk/node-messenger-log#readme"
+}
