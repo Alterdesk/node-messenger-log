@@ -43,15 +43,31 @@ class Logger {
     argumentsToString(args) {
         var string = "";
         if(!args || args.length === 0) {
-            if(string.length > 0) {
-                string += " ";
-            }
             return string;
         }
         for(let index in args) {
-            string += args[index];
+            if(string.length > 0) {
+                string += " ";
+            }
+            var arg = args[index];
+            if(arg instanceof Date) {
+                string += arg.toJSON();
+            } else if(arg instanceof RegExp) {
+                string += arg;
+            } else if(typeof arg === "object") {
+                string += this.objectToString(arg);
+            } else {
+                string += arg;
+            }
         }
         return string;
+    }
+
+    objectToString(obj) {
+        if(!obj || obj.length === 0) {
+            return "[ Invalid object ]";
+        }
+        return "[ Object: " + JSON.stringify(obj) + " ]";
     }
 
 }
