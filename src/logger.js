@@ -35,7 +35,7 @@ class Logger {
 
     getTag(logLevel) {
         if(LOG_TIMESTAMP === 1) {
-            return "[ " + new Date().toJSON() + " " + logLevel + " ]";
+            return "[ " + new Date().toJSON() + " " + logLevel + " ]";//.replace("T", " ").replace("Z", " UTC");
         }
         return "[ " + logLevel + " ]";
     }
@@ -67,7 +67,8 @@ class Logger {
         if(!obj || obj.length === 0) {
             return "[ Invalid object ]";
         }
-        return "[ Object: " + JSON.stringify(obj) + " ]";
+//        return "[ Object: " + JSON.stringify(obj) + " ]";
+        return "[ Object ]";
     }
 
 }
