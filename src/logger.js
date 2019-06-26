@@ -1,4 +1,5 @@
-const LOG_TIMESTAMP = process.env.NODE_MESSENGER_LOG_TIMESTAMP || 0;
+const LOG_TIMESTAMP = parseInt(process.env.NODE_MESSENGER_LOG_TIMESTAMP || 0);
+const LOG_JSON_SPACE = parseInt(process.env.NODE_MESSENGER_LOG_JSON_SPACE || 0);
 
 class Logger {
 
@@ -67,8 +68,21 @@ class Logger {
         if(!obj || obj.length === 0) {
             return "[ Invalid object ]";
         }
-//        return "[ Object: " + JSON.stringify(obj) + " ]";
-        return "[ Object ]";
+        return "[ Object: " + JSON.stringify(obj, this.jsonReplacer(), LOG_JSON_SPACE) + " ]";
+    }
+
+    jsonReplacer() {
+        var objects = [];
+        return (key, value) => {
+            if(typeof value !== "object") {
+                return value;
+            }
+            if(objects.indexOf(value) !== -1) {
+                return "[ Circular ]";
+            }
+            objects.push(value);
+            return value;
+        };
     }
 
 }
