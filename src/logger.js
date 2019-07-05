@@ -101,12 +101,14 @@ class Logger {
         if(!obj || obj.length === 0) {
             return "[ Invalid object ]";
         }
-        return "[ Object: " + JSON.stringify(obj, this.jsonReplacer(), LOG_JSON_SPACE) + " ]";
+        return "[ Object ]";
+//        return "[ Object: " + JSON.stringify(obj, this.jsonReplacer(), LOG_JSON_SPACE) + " ]";
     }
 
     jsonReplacer() {
         var objects = [];
         return (key, value) => {
+//            console.log("REPLACER: key:", key, "value:", value, "objects:", objects);
             if(typeof value !== "object") {
                 return value;
             }
