@@ -97,12 +97,22 @@ class Logger {
         return string;
     }
 
+    getClassName(obj) {
+        if(obj.constructor && obj.constructor.name) {
+            return obj.constructor.name;
+        }
+        return "Object";
+    }
+
     objectToString(obj) {
         if(!obj || obj.length === 0) {
             return "[ Invalid object ]";
         }
-        return "[ Object ]";
-//        return "[ Object: " + JSON.stringify(obj, this.jsonReplacer(), LOG_JSON_SPACE) + " ]";
+        if(obj instanceof Error) {
+            return obj.stack;
+        }
+        return "[ " + this.getClassName(obj) + " ]";
+//        return "[ " + this.getClassName(obj) + ": " + JSON.stringify(obj, this.jsonReplacer(), LOG_JSON_SPACE) + " ]";
     }
 
     jsonReplacer() {
@@ -113,7 +123,7 @@ class Logger {
                 return value;
             }
             if(objects.indexOf(value) !== -1) {
-                return "[ Circular ]";
+                return "[ Circular: " + this.getClassName(value) + " ]";
             }
             objects.push(value);
             return value;
