@@ -1,6 +1,7 @@
 const LOG_TIMESTAMP = parseInt(process.env.NODE_MESSENGER_LOG_TIMESTAMP || 0);
 const LOG_JSON_SPACE = parseInt(process.env.NODE_MESSENGER_LOG_JSON_SPACE || 0);
 const LOG_COLORS = parseInt(process.env.NODE_MESSENGER_LOG_COLORS || 0);
+const LOG_TRUNCATE_STRING = parseInt(process.env.NODE_MESSENGER_LOG_TRUNCATE_STRING || 0);
 
 const DEBUG_LEVEL   = "DEBUG";
 const INFO_LEVEL    = " INFO";
@@ -93,6 +94,9 @@ class Logger {
             } else {
                 string += arg;
             }
+        }
+        if(LOG_TRUNCATE_STRING > 0 && string.length > LOG_TRUNCATE_STRING) {
+            string = string.substring(0, LOG_TRUNCATE_STRING) + "…";
         }
         return string;
     }
